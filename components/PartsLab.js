@@ -27,7 +27,7 @@ export default function PartsLab() {
         </motion.h2>
         <p className="section-sub">Mouse se hilayein, ya neeche se purza chunein.</p>
         <div className="glass parts-stage">
-          <Parts3D active={active} progress={progress} running={inView} />
+          {inView ? <Parts3D active={active} progress={progress} running /> : <div className="canvas-loading">3D parts load ho rahe hain...</div>}
         </div>
         <div className="parts-tabs">
           {tabs.map(([t], i) => (

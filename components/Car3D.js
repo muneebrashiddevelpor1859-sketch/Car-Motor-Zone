@@ -40,6 +40,7 @@ function Scene({ progress }) {
   const c1 = useMemo(() => new THREE.Color(), []);
   const c2 = useMemo(() => new THREE.Color(), []);
   const look = useMemo(() => new THREE.Vector3(0, 0.55, 0), []);
+  const cameraTarget = useMemo(() => new THREE.Vector3(), []);
 
   useFrame((state, dt) => {
     const p = progress.current;
@@ -55,7 +56,8 @@ function Scene({ progress }) {
     const r = 7.2 - 2.6 * s;
     const h = 1.5 + 1.3 * Math.sin(p * Math.PI * 2) * 0.5 + 0.4 * s;
     const a = 0.75;
-    state.camera.position.lerp(new THREE.Vector3(r * Math.cos(a), h, r * Math.sin(a)), 0.06);
+    cameraTarget.set(r * Math.cos(a), h, r * Math.sin(a));
+    state.camera.position.lerp(cameraTarget, 0.06);
     state.camera.lookAt(look);
     // wheels ki raftar scroll ki tezi se
     speed.current += ((2 + Math.abs(p - (g.current.userData.lp ?? p)) * 900) - speed.current) * 0.1;
@@ -98,7 +100,7 @@ function Scene({ progress }) {
 
 export default function Car3D({ progress, active = true }) {
   return (
-    <Canvas frameloop={active ? 'always' : 'never'} camera={{ position: [5.4, 2, 4.8], fov: 36 }} dpr={[1, 1.6]}>
+    <Canvas frameloop={active ? 'always' : 'never'} camera={{ position: [5.4, 2, 4.8], fov: 36 }} dpr={[1, 1.25]}>
       <color attach="background" args={['#eceff4']} />
       <fog attach="fog" args={['#eceff4', 9, 20]} />
       <ambientLight intensity={0.55} />

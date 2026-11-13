@@ -34,7 +34,9 @@ export default function Showroom() {
             {feats.map((f) => <div key={f} className="glass shine">{f}</div>)}
           </div>
         </motion.div>
-        <div className="canvas-wrap" ref={wrap}><Car3D progress={progress} active={near} /></div>
+        <div className="canvas-wrap" ref={wrap}>
+          {near ? <Car3D progress={progress} active /> : <div className="canvas-loading">3D showroom load ho raha hai...</div>}
+        </div>
       </div>
     </section>
   );

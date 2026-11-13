@@ -95,7 +95,7 @@ function Scene({ active, progress }) {
 
 export default function Parts3D({ active, progress, running }) {
   return (
-    <Canvas frameloop={running ? 'always' : 'never'} camera={{ position: [0, 0.6, 6.5], fov: 40 }} dpr={[1, 1.6]}>
+    <Canvas frameloop={running ? 'always' : 'never'} camera={{ position: [0, 0.6, 6.5], fov: 40 }} dpr={[1, 1.25]}>
       <ambientLight intensity={0.7} />
       <directionalLight position={[4, 5, 5]} intensity={2.4} />
       <pointLight position={[-4, -2, 3]} intensity={25} color="#ffd9a0" />
