@@ -272,7 +272,12 @@ h1, h2, h3 { font-family: var(--font-display), serif; font-weight: 500; letter-s
     min-height: 100svh;
     padding: 104px 0 42px;
   }
-  .hero-media .bgv video { object-fit: contain; }
+  .hero-media .bgv .poster,
+  .hero-media .bgv video { object-fit: contain; object-position: center; }
+  .showroom { height: auto; padding: 78px 0; }
+  .showroom .sticky { position: relative; top: auto; height: auto; grid-template-rows: auto auto; gap: 28px; padding-top: 0; }
+  .showroom .canvas-wrap { height: clamp(240px, 72vw, 340px); }
+  .parts-stage { height: clamp(240px, 72vw, 340px); }
   .hero-glow { width: 90vw; height: 90vw; right: -35vw; top: -20vw; }
   .hero-inner { width: 90%; }
   .badge { margin-bottom: 20px; }

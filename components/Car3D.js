@@ -1,7 +1,7 @@
 'use client';
 import { useMemo, useRef } from 'react';
 import * as THREE from 'three';
-import { Canvas, useFrame } from '@react-three/fiber';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { PAINTS } from './paints';
 import { Sparkles } from '@react-three/drei';
 
@@ -36,6 +36,7 @@ function Beam({ z }) {
 function Scene({ progress }) {
   const g = useRef();
   const speed = useRef(2);
+  const isMobile = useThree((state) => state.size.width <= 700);
   const paint = useMemo(() => new THREE.MeshPhysicalMaterial({ color: PAINTS[0].hex, metalness: 0.65, roughness: 0.22, clearcoat: 0.8, clearcoatRoughness: 0.12 }), []);
   const c1 = useMemo(() => new THREE.Color(), []);
   const c2 = useMemo(() => new THREE.Color(), []);
@@ -53,8 +54,10 @@ function Scene({ progress }) {
     paint.color.lerpColors(c1.set(PAINTS[i].hex), c2.set(PAINTS[i + 1].hex), f - i);
     // camera dolly: door se qareeb, phir oopar
     const s = Math.sin(p * Math.PI);
-    const r = 7.2 - 2.6 * s;
-    const h = 1.5 + 1.3 * Math.sin(p * Math.PI * 2) * 0.5 + 0.4 * s;
+    const r = isMobile ? 8.4 - 1.4 * s : 7.2 - 2.6 * s;
+    const h = isMobile
+      ? 1.7 + 1.3 * Math.sin(p * Math.PI * 2) * 0.5 + 0.3 * s
+      : 1.5 + 1.3 * Math.sin(p * Math.PI * 2) * 0.5 + 0.4 * s;
     const a = 0.75;
     cameraTarget.set(r * Math.cos(a), h, r * Math.sin(a));
     state.camera.position.lerp(cameraTarget, 0.06);
