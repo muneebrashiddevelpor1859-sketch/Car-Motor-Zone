@@ -1,11 +1,11 @@
 'use client';
 import { useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Environment, Float, ContactShadows } from '@react-three/drei';
+import { Float } from '@react-three/drei';
 
-const steel = { color: '#cfd3da', metalness: 1, roughness: 0.15 };
-const dark = { color: '#16181d', metalness: 0.6, roughness: 0.45 };
-const gold = { color: '#b58a4a', metalness: 1, roughness: 0.22 };
+const steel = { color: '#cfd3da', metalness: 0.65, roughness: 0.25 };
+const dark = { color: '#16181d', metalness: 0.35, roughness: 0.45 };
+const gold = { color: '#b58a4a', metalness: 0.65, roughness: 0.28 };
 
 function Rim() {
   const r = useRef();
@@ -69,39 +69,28 @@ function Engine() {
 const parts = [<Rim key="rim" />, <Disc key="disc" />, <Engine key="eng" />];
 
 function Scene({ active, progress }) {
-  const refs = [useRef(), useRef(), useRef()];
   const root = useRef();
   useFrame((state, dt) => {
-    refs.forEach((r, i) => {
-      const t = i === active ? 1 : 0;
-      const tx = (i - active) * 4.2;
-      const s = r.current.scale.x + ((t ? 1.25 : 0.55) - r.current.scale.x) * Math.min(1, dt * 5);
-      r.current.scale.setScalar(s);
-      r.current.position.x += (tx - r.current.position.x) * Math.min(1, dt * 5);
-    });
-    root.current.rotation.y += ((state.pointer.x * 0.5 + progress.current * 1.6) - root.current.rotation.y) * 0.06;
-    root.current.rotation.x += ((-state.pointer.y * 0.25) - root.current.rotation.x) * 0.06;
+    root.current.rotation.y += ((state.pointer.x * 0.5 + progress.current * 1.6) - root.current.rotation.y) * Math.min(1, dt * 5);
+    root.current.rotation.x += ((-state.pointer.y * 0.25) - root.current.rotation.x) * Math.min(1, dt * 5);
   });
   return (
     <group ref={root}>
-      {parts.map((p, i) => (
-        <Float key={i} speed={2} rotationIntensity={0.15} floatIntensity={0.8}>
-          <group ref={refs[i]} position={[(i - active) * 4.2, 0, 0]}>{p}</group>
-        </Float>
-      ))}
+      <Float speed={2} rotationIntensity={0.15} floatIntensity={0.8}>
+        <group scale={1.25}>{parts[active]}</group>
+      </Float>
     </group>
   );
 }
 
 export default function Parts3D({ active, progress, running }) {
   return (
-    <Canvas frameloop={running ? 'always' : 'never'} camera={{ position: [0, 0.6, 6.5], fov: 40 }} dpr={[1, 1.25]}>
+    <Canvas frameloop={running ? 'always' : 'never'} camera={{ position: [0, 0.6, 6.5], fov: 40 }} dpr={[1, 1.1]} gl={{ antialias: false, powerPreference: 'high-performance' }}>
       <ambientLight intensity={0.7} />
       <directionalLight position={[4, 5, 5]} intensity={2.4} />
-      <pointLight position={[-4, -2, 3]} intensity={25} color="#ffd9a0" />
-      <Environment preset="city" />
+      <directionalLight position={[-4, 3, -5]} intensity={1.4} color="#ffd9a0" />
+      <pointLight position={[-4, -2, 3]} intensity={12} color="#ffd9a0" />
       <Scene active={active} progress={progress} />
-      <ContactShadows position={[0, -1.7, 0]} opacity={0.35} scale={14} blur={2.8} far={4} />
     </Canvas>
   );
 }

@@ -3,10 +3,10 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const q = [
-  ['Kya har brand ki gaari par kaam hota hai?', 'Ji haan, Japanese, European, Korean aur Chinese brands sab par kaam karte hain.'],
-  ['Service mein kitna waqt lagta hai?', 'Routine service usually usi din ho jati hai. Bari repair ka waqt inspection ke baad bata diya jata hai.'],
-  ['Kya parts genuine hote hain?', 'Ji, hum genuine ya OEM-quality parts use karte hain aur kaam par warranty dete hain.'],
-  ['Booking kaise karein?', 'Neeche wala form bharein, details seedhi hamare WhatsApp par aa jati hain.'],
+  ['Do you work on every car brand?', 'Yes. We service Japanese, European, Korean, and Chinese car brands.'],
+  ['How long does a service take?', 'Routine services are usually completed the same day. We’ll provide a timeline for larger repairs after inspection.'],
+  ['Do you use genuine parts?', 'Yes. We use genuine or OEM-quality parts and provide a warranty on our work.'],
+  ['How do I book an appointment?', 'Fill out the form below and your details will be sent directly to us on WhatsApp.'],
 ];
 
 export default function FAQ() {
@@ -14,7 +14,7 @@ export default function FAQ() {
   return (
     <section className="section">
       <div className="container faq">
-        <h2 className="section-title">Aam sawalat.</h2>
+        <h2 className="section-title">Frequently asked questions.</h2>
         <div>
           {q.map(([a, b], i) => (
             <div key={a} className="glass faq-item">

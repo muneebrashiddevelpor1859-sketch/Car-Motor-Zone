@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const t = [
-  ['Ahmed R.', 'Honda Civic', 'Kai workshops dekhe lekin BJO jaisi honesty kahin nahi mili. Estimate bilkul sahi nikla.'],
-  ['Sara K.', 'Toyota Corolla', 'Detailing ke baad gaari nayi lag rahi thi. Time par delivery bhi di.'],
-  ['Usman T.', 'BMW 3 Series', 'Diagnostics se woh masla pakra gaya jo doosri jagah samajh nahi aaya tha.'],
+  ['Ahmed R.', 'Honda Civic', 'I visited many workshops, but none were as honest as BJO. The estimate was spot on.'],
+  ['Sara K.', 'Toyota Corolla', 'My car looked brand new after the detailing. It was delivered right on time, too.'],
+  ['Usman T.', 'BMW 3 Series', 'Their diagnostics found an issue that other workshops couldn’t figure out.'],
 ];
 
 export default function Testimonials() {
@@ -14,7 +14,7 @@ export default function Testimonials() {
   return (
     <section className="section" style={{ background: '#fff' }}>
       <div className="container" style={{ textAlign: 'center' }}>
-        <h2 className="section-title" style={{ margin: '0 auto' }}>Customers kya kehte hain.</h2>
+        <h2 className="section-title" style={{ margin: '0 auto' }}>What our customers say.</h2>
         <div className="testi">
           <AnimatePresence mode="wait">
             <motion.div key={i} className="glass testi-card" initial={{ opacity: 0, x: 80 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -80 }} transition={{ duration: 0.6 }}>

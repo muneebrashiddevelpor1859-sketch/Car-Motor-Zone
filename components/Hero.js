@@ -4,7 +4,7 @@ import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'fram
 import BgVideo from './BgVideo';
 import Counter from './Counter';
 
-const words = 'Aap ki gaari ka sab se behtareen khayal.'.split(' ');
+const words = 'The best care for your car.'.split(' ');
 
 export default function Hero() {
   const ref = useRef(null);
@@ -30,7 +30,7 @@ export default function Hero() {
 
       <motion.div className="container hero-inner" style={{ y: textY, opacity: fade, rotateY: rotY, rotateX: rotX, transformPerspective: 1200 }}>
         <motion.span className="badge" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
-          Lahore ka premium car workshop
+          Lahore's premium car workshop
         </motion.span>
         <h1>
           {words.map((w, i) => (
@@ -40,15 +40,15 @@ export default function Hero() {
           ))}
         </h1>
         <motion.p initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 1.3 }}>
-          BJO Motors mein service, detailing, diagnostics aur repair ek hi chhat ke neeche. Har brand, har model.
+          BJO Motors brings servicing, detailing, diagnostics, and repairs together under one roof. Every brand, every model.
         </motion.p>
         <motion.div className="hero-actions" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.6 }}>
           <a href="#contact" className="btn btn-gold">Book a Service</a>
           <a href="#showroom" className="btn btn-ghost">Watch 3D Showroom</a>
         </motion.div>
         <motion.div className="hero-stats" initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.9, duration: 1 }}>
-          <div className="stat"><b><Counter to={15} suffix="+" /></b><span>Saal ka tajurba</span></div>
-          <div className="stat"><b><Counter to={5000} suffix="+" /></b><span>Khush customers</span></div>
+          <div className="stat"><b><Counter to={15} suffix="+" /></b><span>Years of experience</span></div>
+          <div className="stat"><b><Counter to={5000} suffix="+" /></b><span>Happy customers</span></div>
           <div className="stat"><b><Counter to={30} suffix="+" /></b><span>Car brands</span></div>
         </motion.div>
       </motion.div>

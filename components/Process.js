@@ -3,10 +3,10 @@ import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
 const steps = [
-  ['Booking', 'Form ya WhatsApp par apni gaari aur masla bataein.'],
-  ['Inspection', 'Computer scan aur 50-point check, saath hi clear estimate.'],
-  ['Repair & Care', 'Certified technicians genuine parts ke sath kaam karte hain.'],
-  ['Delivery', 'Final quality check, wash aur warranty ke sath gaari wapas.'],
+  ['Booking', 'Tell us about your car and the issue through our form or WhatsApp.'],
+  ['Inspection', 'A computer scan and 50-point check, followed by a clear estimate.'],
+  ['Repair & Care', 'Our certified technicians get to work using genuine parts.'],
+  ['Delivery', 'Get your car back after a final quality check and wash, with a warranty.'],
 ];
 
 export default function Process() {
@@ -16,7 +16,7 @@ export default function Process() {
   return (
     <section id="process" className="section" style={{ background: '#fff' }}>
       <div className="container">
-        <h2 className="section-title">Chaar aasaan qadam.</h2>
+        <h2 className="section-title">Four simple steps.</h2>
         <div className="timeline" ref={ref}>
           <div className="tl-line"><motion.div style={{ height: h }} /></div>
           {steps.map(([t, d], i) => (

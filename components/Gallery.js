@@ -14,7 +14,7 @@ export default function Gallery() {
   return (
     <section id="gallery" className="section" style={{ perspective: 1400 }}>
       <div className="container">
-        <h2 className="section-title">Hamara kaam, hamari pehchan.</h2>
+        <h2 className="section-title">Our work speaks for itself.</h2>
         <div className="gallery">
           {items.map(([src, t], i) => (
             <motion.div

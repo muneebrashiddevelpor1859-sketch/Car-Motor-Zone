@@ -1,12 +1,12 @@
 import { Bodoni_Moda, Manrope } from 'next/font/google';
 import './globals.css';
 
-const display = Bodoni_Moda({ subsets: ['latin'], variable: '--font-display', display: 'swap' });
+const display = Bodoni_Moda({ subsets: ['latin'], variable: '--font-display', display: 'swap', adjustFontFallback: false });
 const body = Manrope({ subsets: ['latin'], variable: '--font-body', display: 'swap' });
 
 export const metadata = {
   title: 'BJO Motors | Luxury Car Workshop',
-  description: 'BJO Motors - premium car servicing, detailing, diagnostics, tuning aur repair. Har brand ke liye expert care.',
+  description: 'BJO Motors offers premium car servicing, detailing, diagnostics, tuning, and repairs, with expert care for every brand.',
 };
 
 export default function RootLayout({ children }) {

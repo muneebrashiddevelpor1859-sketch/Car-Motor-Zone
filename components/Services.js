@@ -3,12 +3,12 @@ import { motion } from 'framer-motion';
 import { useRef } from 'react';
 
 const services = [
-  { ic: '🛢️', t: 'Engine Service', d: 'Oil change, filters, tuning aur full engine health check — company standard ke mutabiq.' },
-  { ic: '🧪', t: 'Computer Diagnostics', d: 'Latest scanners se har warning light ki asal wajah, bina andaze ke.' },
-  { ic: '✨', t: 'Detailing & Ceramic', d: 'Paint correction, ceramic coating aur interior deep clean — showroom jaisi chamak.' },
-  { ic: '🛞', t: 'Brakes & Suspension', d: 'Brake pads, discs, shocks aur alignment — safe aur smooth drive ke liye.' },
-  { ic: '❄️', t: 'AC & Electrical', d: 'AC gas, compressor, battery, alternator aur wiring ki mukammal repair.' },
-  { ic: '🎨', t: 'Denting & Painting', d: 'Accident repair aur perfect colour matching, factory finish ke sath.' },
+  { ic: '🛢️', t: 'Engine Service', d: 'Oil and filter changes, tuning, and a complete engine health check to manufacturer standards.' },
+  { ic: '🧪', t: 'Computer Diagnostics', d: 'Find the exact cause of every warning light with advanced diagnostic scanners.' },
+  { ic: '✨', t: 'Detailing & Ceramic', d: 'Paint correction, ceramic coating, and deep interior cleaning for a showroom shine.' },
+  { ic: '🛞', t: 'Brakes & Suspension', d: 'Brake pads, discs, shocks, and wheel alignment for a safe, smooth drive.' },
+  { ic: '❄️', t: 'AC & Electrical', d: 'Complete repairs for AC, compressors, batteries, alternators, and wiring.' },
+  { ic: '🎨', t: 'Denting & Painting', d: 'Accident repairs with precise colour matching and a factory-quality finish.' },
 ];
 
 function Tilt({ children, i }) {
@@ -40,9 +40,9 @@ export default function Services() {
       <div className="services-bg" />
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <motion.h2 className="section-title" initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.9 }}>
-          Har zaroorat ke liye expert hath.
+          Expert care for every need.
         </motion.h2>
-        <p className="section-sub">Chhoti service se le kar bari repair tak — certified technicians aur genuine parts ke sath.</p>
+        <p className="section-sub">From routine maintenance to major repairs, trust our certified technicians and genuine parts.</p>
         <div className="grid">
           {services.map((s, i) => (
             <Tilt key={s.t} i={i}>

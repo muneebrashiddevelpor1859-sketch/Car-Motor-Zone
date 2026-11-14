@@ -3,7 +3,7 @@ import { useMemo, useRef } from 'react';
 import * as THREE from 'three';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { PAINTS } from './paints';
-import { Environment, ContactShadows, Sparkles, MeshReflectorMaterial } from '@react-three/drei';
+import { Sparkles } from '@react-three/drei';
 
 
 function Wheel({ position, speed }) {
@@ -36,7 +36,7 @@ function Beam({ z }) {
 function Scene({ progress }) {
   const g = useRef();
   const speed = useRef(2);
-  const paint = useMemo(() => new THREE.MeshPhysicalMaterial({ color: PAINTS[0].hex, metalness: 0.9, roughness: 0.18, clearcoat: 1, clearcoatRoughness: 0.05 }), []);
+  const paint = useMemo(() => new THREE.MeshPhysicalMaterial({ color: PAINTS[0].hex, metalness: 0.65, roughness: 0.22, clearcoat: 0.8, clearcoatRoughness: 0.12 }), []);
   const c1 = useMemo(() => new THREE.Color(), []);
   const c2 = useMemo(() => new THREE.Color(), []);
   const look = useMemo(() => new THREE.Vector3(0, 0.55, 0), []);
@@ -84,29 +84,28 @@ function Scene({ progress }) {
         <Wheel position={[-1.2, 0.3, 0.85]} speed={speed} /><Wheel position={[-1.2, 0.3, -0.85]} speed={speed} />
       </group>
 
-      {/* turntable ring + reflective floor + sparkles */}
+      {/* turntable ring + floor + sparkles */}
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.012, 0]}>
         <ringGeometry args={[2.9, 3.0, 96]} /><meshBasicMaterial color="#c9a36a" />
       </mesh>
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]}>
-        <circleGeometry args={[9, 64]} />
-        <MeshReflectorMaterial blur={[300, 80]} resolution={512} mixBlur={1} mixStrength={35} mirror={0.55} roughness={1} depthScale={1} minDepthThreshold={0.5} maxDepthThreshold={1.3} color="#dfe3ea" metalness={0.4} />
+        <circleGeometry args={[9, 32]} />
+        <meshStandardMaterial color="#dfe3ea" roughness={0.92} metalness={0.05} />
       </mesh>
-      <Sparkles count={70} scale={[10, 3.5, 10]} position={[0, 1.6, 0]} size={3.2} speed={0.45} color="#c9a36a" />
-      <ContactShadows position={[0, 0.02, 0]} opacity={0.5} scale={10} blur={2.6} far={3} />
+      <Sparkles count={24} scale={[10, 3.5, 10]} position={[0, 1.6, 0]} size={3.2} speed={0.45} color="#c9a36a" />
     </>
   );
 }
 
 export default function Car3D({ progress, active = true }) {
   return (
-    <Canvas frameloop={active ? 'always' : 'never'} camera={{ position: [5.4, 2, 4.8], fov: 36 }} dpr={[1, 1.25]}>
+    <Canvas frameloop={active ? 'always' : 'never'} camera={{ position: [5.4, 2, 4.8], fov: 36 }} dpr={[1, 1.1]} gl={{ antialias: false, powerPreference: 'high-performance' }}>
       <color attach="background" args={['#eceff4']} />
       <fog attach="fog" args={['#eceff4', 9, 20]} />
-      <ambientLight intensity={0.55} />
+      <ambientLight intensity={0.75} />
       <directionalLight position={[5, 6, 4]} intensity={2.2} />
+      <directionalLight position={[-4, 3, -5]} intensity={1.2} color="#fff4e5" />
       <spotLight position={[-6, 6, -2]} intensity={60} angle={0.5} penumbra={1} color="#ffe9c4" />
-      <Environment preset="city" />
       <Scene progress={progress} />
     </Canvas>
   );

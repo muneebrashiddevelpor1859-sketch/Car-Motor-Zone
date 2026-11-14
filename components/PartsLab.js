@@ -3,17 +3,18 @@ import dynamic from 'next/dynamic';
 import { useRef, useState } from 'react';
 import { useInView, useScroll, useMotionValueEvent, motion } from 'framer-motion';
 
-const Parts3D = dynamic(() => import('./Parts3D'), { ssr: false, loading: () => <div className="canvas-loading">3D parts load ho rahe hain...</div> });
+const Parts3D = dynamic(() => import('./Parts3D'), { ssr: false, loading: () => <div className="canvas-loading">Loading 3D parts...</div> });
 
 const tabs = [
-  ['Alloy Rim', 'Rim ki repair, polishing aur powder coating. Gaari ka look pehle jaisa, balke behtar.'],
-  ['Brake Disc', 'Disc skimming, pads aur caliper service. Safe braking, har mausam mein.'],
-  ['Engine Gears', 'Timing, gearbox aur engine ki mukammal overhaul genuine parts ke sath.'],
+  ['Alloy Rim', 'Rim repairs, polishing, and powder coating to restore—and even improve—your car’s look.'],
+  ['Brake Disc', 'Disc skimming, brake pad replacement, and caliper servicing for safe braking in every season.'],
+  ['Engine Gears', 'Complete timing, gearbox, and engine overhauls using genuine parts.'],
 ];
 
 export default function PartsLab() {
   const ref = useRef(null);
-  const inView = useInView(ref, { margin: '200px 0px' });
+  const stageRef = useRef(null);
+  const inView = useInView(stageRef, { amount: 0.25 });
   const progress = useRef(0);
   const [active, setActive] = useState(0);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
@@ -23,11 +24,11 @@ export default function PartsLab() {
     <section className="section parts" ref={ref}>
       <div className="container">
         <motion.h2 className="section-title" initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          Har purze ka khayal, 3D mein.
+          Every part, brought to life in 3D.
         </motion.h2>
-        <p className="section-sub">Mouse se hilayein, ya neeche se purza chunein.</p>
-        <div className="glass parts-stage">
-          {inView ? <Parts3D active={active} progress={progress} running /> : <div className="canvas-loading">3D parts load ho rahe hain...</div>}
+        <p className="section-sub">Move your mouse to explore, or select a part below.</p>
+        <div ref={stageRef} className="glass parts-stage">
+          {inView ? <Parts3D active={active} progress={progress} running /> : <div className="canvas-loading">Loading 3D parts...</div>}
         </div>
         <div className="parts-tabs">
           {tabs.map(([t], i) => (

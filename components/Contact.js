@@ -18,9 +18,9 @@ export default function Contact() {
       if (!json.ok) throw new Error(json.error);
       if (json.mode === 'link') window.open(json.url, '_blank');
       e.target.reset();
-      setState({ loading: false, ok: true, msg: 'Shukriya! Aap ki request WhatsApp par bhej di gayi hai.' });
+      setState({ loading: false, ok: true, msg: 'Thank you! Your request has been sent via WhatsApp.' });
     } catch (err) {
-      setState({ loading: false, ok: false, msg: err.message || 'Kuch masla hua, dobara koshish karein.' });
+      setState({ loading: false, ok: false, msg: err.message || 'Something went wrong. Please try again.' });
     }
   }
 
@@ -29,25 +29,25 @@ export default function Contact() {
       <div className="bg"><BgVideo lazy poster="/images/contact-poster.jpg" src="/videos/contact.mp4" /></div>
       <div className="container">
         <div>
-          <h2 className="section-title">Apni gaari ki service book karein.</h2>
-          <p className="section-sub">Form bharein, details seedhi hamare WhatsApp par aa jayengi aur hum jaldi rabta karenge.</p>
+          <h2 className="section-title">Book a service for your car.</h2>
+          <p className="section-sub">Fill out the form to send your details directly to us on WhatsApp. We'll be in touch shortly.</p>
           <div className="info">
             <span>📍 Lahore, Pakistan</span>
-            <span>🕘 Pir – Sat: 9:00 AM – 8:00 PM</span>
+            <span>🕘 Mon – Sat: 9:00 AM – 8:00 PM</span>
           </div>
         </div>
         <motion.form className="glass form" onSubmit={submit} initial={{ opacity: 0, y: 60 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.9 }}>
           <div className="row">
-            <input name="name" placeholder="Aap ka naam" required />
+            <input name="name" placeholder="Your name" required />
             <input name="phone" placeholder="Phone number" required inputMode="tel" />
           </div>
-          <input name="car" placeholder="Gaari ka brand aur model (misal: Honda Civic 2020)" />
+          <input name="car" placeholder="Car make and model (e.g., Honda Civic 2020)" />
           <select name="service" defaultValue="">
-            <option value="" disabled>Service chunein</option>
+            <option value="" disabled>Select a service</option>
             {services.map((s) => <option key={s}>{s}</option>)}
           </select>
-          <textarea name="message" placeholder="Masla ya khaas hidayat" />
-          <button className="btn btn-gold" disabled={state.loading}>{state.loading ? 'Bhej rahe hain...' : 'Send on WhatsApp'}</button>
+          <textarea name="message" placeholder="Describe the issue or add special instructions" />
+          <button className="btn btn-gold" disabled={state.loading}>{state.loading ? 'Sending...' : 'Send on WhatsApp'}</button>
           {state.msg && <p className="msg" style={{ color: state.ok ? '#1d7a43' : '#b3261e' }}>{state.msg}</p>}
         </motion.form>
       </div>
